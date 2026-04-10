@@ -4,7 +4,7 @@
 
 ---
 
-## 📍 Pertemuan 1: Introduction to Python
+## 📍 Materi 1: Introduction to Python
 
 [🔗 Link to Notebook](https://colab.research.google.com/drive/1dBvLlvZKBfkkEq_MCzORCioR9imydV1M?usp=sharing)
 
@@ -19,7 +19,7 @@ Pertemuan ini merupakan pengenalan dasar Python. Anda akan belajar cara menginst
 
 ---
 
-## 📍 Pertemuan 2: Data Types & Operators
+## 📍 Materi 2: Data Types & Operators
 
 [🔗 Link to Notebook](https://colab.research.google.com/drive/1VTUrKAHR8UpUa4tUunes7CdHfmXBUOPt?usp=sharing)
 
@@ -38,7 +38,7 @@ Pertemuan ini membahas jenis-jenis data yang dapat disimpan dalam variabel Pytho
 
 ---
 
-## 📍 Pertemuan 3: Conditions & Loops
+## 📍 Materi 3: Conditions & Loops
 
 [🔗 Link to Notebook](https://colab.research.google.com/drive/1Oa7pJrngnVK_Qpwyy6UADtc7pjZXCpw7?usp=sharing)
 
@@ -53,7 +53,7 @@ Pertemuan ini membahas struktur kontrol alur program. Conditions (percabangan) m
 
 ---
 
-## 📍 Pertemuan 4: Functions
+## 📍 Materi 4: Functions
 
 [🔗 Link to Notebook](https://colab.research.google.com/drive/1whtoGRHVKrd2TlEuMipQl7dhq-ikjqdt?usp=sharing)
 
@@ -67,7 +67,7 @@ Pertemuan ini membahas fungsi, yaitu blok kode yang dapat digunakan kembali (reu
 
 ---
 
-## 📍 Pertemuan 5: Lists
+## 📍 Materi 5: Lists
 
 [🔗 Link to Notebook](https://colab.research.google.com/drive/11EkpTvaurHZm8P8UNwBuu0gXArsmJpzI?usp=sharing)
 
@@ -85,7 +85,7 @@ Pertemuan ini membahas List, yaitu tipe data koleksi yang paling fleksibel di Py
 
 ---
 
-## 📍 Pertemuan 6: Tuples & Sets
+## 📍 Materi 6: Tuples & Sets
 
 [🔗 Link to Notebook](https://colab.research.google.com/drive/1lWseBChR2R2XxLbuQ2k2jrT6fDq0i0u4?usp=sharing)
 
@@ -103,7 +103,7 @@ Pertemuan ini membahas dua tipe data koleksi lainnya: Tuple (mirip list tetapi t
 
 ---
 
-## 📍 Pertemuan 7: Dictionaries
+## 📍 Materi 7: Dictionaries
 
 [🔗 Link to Notebook](https://colab.research.google.com/drive/1HpccVEVa_ZCtqqJ2vt6X1YMBMxXXP8Mf?usp=sharing)
 
