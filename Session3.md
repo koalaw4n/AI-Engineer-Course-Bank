@@ -1,4 +1,7 @@
 # **Notebook: Praktik Exploratory Data Analysis (EDA) & Data Cleaning – Sesi 3 (Detail)**
+
+Rekaman materi tambahan EDA: https://drive.google.com/file/d/1r-KXlOklFq-zG3XYO5b6IFUaRyjajZGH/view?usp=sharing
+
 **Konteks Bisnis:**  
 Puskesmas "Sehat Bersama" ingin menurunkan risiko diabetes dengan memahami faktor-faktor yang memengaruhinya. Data diambil dari 200 pasien secara acak.
 
