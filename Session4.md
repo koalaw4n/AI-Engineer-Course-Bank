@@ -1,6 +1,13 @@
 # Sesi 4: Bangun Model Machine Learning
 ## Fokus pada Teknik, Visualisasi, dan Kode Praktis
 
+Machine Learning 1: https://drive.google.com/file/d/1ABAbeABUQa06UO8Ij9zKZwtPs3Sv3vwI/view?usp=sharing
+Kode Machine Learning 1: https://colab.research.google.com/drive/1mu0ubsNR_tOs2upyANELpdpcOLvv-bE7?usp=sharing
+Machine Learning 2: https://drive.google.com/file/d/1oPzGeOQOQnTpQDhI4tBKeTEdpn1n7ch7/view?usp=sharing
+Kode Machine Learning 2:
+https://colab.research.google.com/drive/1BYB16P99nViWnCqh5eDeuHBHOfuIcb0y?usp=sharing
+https://colab.research.google.com/drive/1rldN97nZsCqi1rc5NoUvdtDyIsB6B1qi?usp=sharing
+
 ---
 
 ## 1. Persiapan Modeling (Teknik Dasar)
