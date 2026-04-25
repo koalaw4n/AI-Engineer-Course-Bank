@@ -514,6 +514,41 @@ if __name__ == "__main__":
     train_mall_clustering(n_clusters=6)
     
     print("\n✅ All models trained and saved!")
+
+---
+
+# 🎯 6.4 TUGAS: MEMBANGUN MODULAR PROJECT (STEP-BY-STEP)
+
+Sekarang saatnya kamu mempraktikkan semua yang telah dipelajari dengan membangun project terstruktur di Google Colab.
+
+### 📋 Langkah-langkah Pengerjaan:
+
+1. **Persiapan Folder**: 
+   - Jalankan Cell 1 untuk membuat folder `/drive/MyDrive/project_ai_sesi6`.
+   - Pastikan subfolder `data/`, `src/`, `models/`, dan `logs/` sudah muncul.
+
+2. **Membuat Modul Utama**:
+   - Tulis file `config.py` menggunakan `%%writefile`.
+   - Tulis file `preprocess.py` (pastikan fungsi `handle_missing_values` dan `remove_outliers_iqr` sudah masuk).
+   - Tulis file `train.py` (implementasikan training untuk Regresi, Klasifikasi, atau Klustering).
+
+3. **Eksperimen Training**:
+   - Lakukan training minimal 2 model berbeda untuk dataset yang sama (misal: Random Forest vs XGBoost).
+   - Catat hasil akurasi/R2 score masing-masing.
+
+4. **Visualisasi Hasil**:
+   - Jalankan modul `evaluate.py` untuk melihat visualisasi perbandingan model (Actual vs Predicted atau Confusion Matrix).
+
+5. **Simpan Model**:
+   - Pastikan file model `.pkl` dan metrik `.json` tersimpan rapi di folder `models/`.
+
+### 💡 Tips Sukses:
+- Jika ada error `ModuleNotFoundError`, pastikan kamu sudah melakukan `sys.path.append(PROJECT_PATH)`.
+- Gunakan `!ls -R {PROJECT_PATH}` untuk memverifikasi apakah file `.py` benar-benar sudah terbuat di folder yang benar.
+
+---
+
+> **"Modularitas adalah kunci dari scalability. Model yang rapi akan sangat mudah untuk di-deploy dan dikembangkan oleh tim lain."**
 ```
 
 ```python
