@@ -4,23 +4,6 @@ Selamat! Kamu telah sampai di tahap integrasi. Sesuai dengan materi di repositor
 
 ---
 
-# 🇮🇩 POJOK INDONESIA: DATASET LOKAL (REKOMENDASI!)
-Gunakan dataset dengan konteks lokal Indonesia untuk portofolio yang lebih relevan dengan industri dalam negeri.
-
-### 📈 Regresi: Prediksi Saham BBCA (Perbankan ID)
-- **Link Raw CSV**: [🔗 BBCA.JK Data](https://raw.githubusercontent.com/kanadarma/indonesia-stock-market-data-set/master/BBCA.JK.csv)
-- **Tugas**: Prediksi harga `Close` berdasarkan volume dan harga pembukaan.
-
-### 🏥 Klasifikasi: Kualitas Udara Jakarta (ISPU)
-- **Link Raw CSV**: [🔗 ISPU Jakarta 2021](https://raw.githubusercontent.com/yofisunarta/ispu-jakarta/master/data/ispu_jakarta_2021.csv)
-- **Tugas**: Tebak kategori kualitas udara (Baik/Sedang/Tidak Sehat) berdasarkan polutan (PM10, SO2, CO, dll).
-
-### 🛍️ Klustering: Konsumsi Pangan Per Provinsi
-- **Link Raw CSV**: [🔗 Konsumsi Pangan ID](https://raw.githubusercontent.com/KurniawanDwi/Dataset-Indonesia/master/konsumsi_pangan.csv)
-- **Tugas**: Kelompokkan provinsi di Indonesia berdasarkan pola konsumsi karbohidrat, protein, dan lemak.
-
----
-
 # 📈 CASE STUDY 1: REGRESI (GLOBAL)
 - **Prediksi Harga Rumah**:  
   [🔗 Link Raw CSV](https://raw.githubusercontent.com/ageron/handson-ml2/master/datasets/housing/housing.csv)
