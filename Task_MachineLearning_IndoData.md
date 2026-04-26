@@ -5,16 +5,16 @@ Tugas ini dirancang untuk menguji kemampuan Anda dalam mengolah data publik Indo
 
 ---
 
-## 📂 Alur Kerja (Workflow) & Penjelasan Langkah
+## 📂 Alur Kerja (Workflow) & Referensi Kode
 Ikuti 7 langkah standar industri ini untuk setiap tugas:
 
-1.  **Data Preparation**: Tahap awal untuk memastikan data siap diolah. Meliputi pemuatan file CSV, pengecekan nilai kosong (`isnull()`), dan pembersihan teks agar menjadi angka (numerik).
-2.  **EDA (Exploratory Data Analysis)**: Mengenali data Anda. Gunakan statistik deskriptif dan grafik untuk melihat pola, tren, atau anomali sebelum membuat model.
-3.  **Feature Engineering**: Proses mengubah data mentah menjadi fitur yang lebih informatif bagi model. Contohnya: memecah string koordinat menjadi angka Latitude/Longitude atau mengubah tanggal menjadi "usia".
-4.  **Model Training**: Pemilihan algoritma dan proses "belajar" model dari data latih.
-5.  **Model Validation**: Mengukur seberapa pintar model Anda menggunakan data uji. Metrik seperti Akurasi atau RMSE sangat penting di sini.
-6.  **Tuning & Finalize**: Mencoba berbagai kombinasi parameter untuk mencari performa terbaik dan menyimpan model akhir.
-7.  **Referensi**: Mencantumkan sumber dokumentasi untuk memudahkan penelusuran kembali.
+1.  **Data Preparation**: `pd.read_csv()`, `df.isnull().sum()`, `df.dropna()`.
+2.  **EDA**: `df.describe()`, `sns.histplot()`, `plt.show()`.
+3.  **Feature Engineering**: `df.apply()`, `LabelEncoder()`, `StandardScaler()`.
+4.  **Model Training**: `model.fit(X_train, y_train)`.
+5.  **Model Validation**: `accuracy_score()`, `mean_squared_error()`.
+6.  **Tuning & Finalize**: `GridSearchCV()`, `model.predict()`.
+7.  **Referensi**: Dokumentasi resmi Scikit-learn & Pandas.
 
 ---
 
@@ -22,57 +22,80 @@ Ikuti 7 langkah standar industri ini untuk setiap tugas:
 **Dataset**: [indonesia_volcanoes.csv](https://raw.githubusercontent.com/yogski/indonesian_public_data/master/csv/indonesia_volcanoes.csv)  
 **Tujuan**: Memprediksi tipe/bentuk gunung berapi (`bentuk`) berdasarkan fitur geografis.
 
-### 📋 Panduan Langkah Demi Langkah:
-*   **Step 1**: Load data dan bersihkan kolom `tinggi_meter`. Hilangkan kata " meter" menggunakan `.str.replace()` agar kolom bisa dihitung secara matematis.
-*   **Step 2**: Cek distribusi kelas `bentuk`. Apakah ada tipe gunung yang sangat sedikit? Visualisasikan dengan `sns.countplot()`.
-*   **Step 3**: Pecah kolom `geolokasi`. Gunakan Regex untuk mengekstrak angka. Koordinat ini adalah fitur kunci untuk membedakan tipe gunung berdasarkan lokasi.
-*   **Step 4**: Pisahkan data (X: fitur, y: target). Train menggunakan `RandomForestClassifier`.
-*   **Step 5**: Gunakan `classification_report` untuk melihat presisi dan recall setiap tipe gunung.
-*   **Step 6**: Eksperimen dengan parameter `n_estimators` (jumlah pohon) untuk melihat pengaruhnya terhadap akurasi.
-*   **Step 7**: Dokumentasikan fungsi Regex yang Anda gunakan.
-
-#### 💡 Contoh Kode:
-```python
-import re
-import pandas as pd
-
-# Contoh Regex untuk mengambil angka koordinat
-def extract_coords(text):
-    # Mencari pola angka desimal
-    match = re.findall(r"[-+]?\d*\.\d+|\d+", str(text))
-    return float(match[0]), float(match[1]) if len(match) >= 2 else (0, 0)
-
-df['lat'], df['long'] = zip(*df['geolokasi'].map(extract_coords))
-```
+### 📋 Panduan & Referensi Kode:
+*   **Step 1 (Data Prep)**: Bersihkan `tinggi_meter`.
+    ```python
+    df['tinggi_meter'] = df['tinggi_meter'].str.extract('(\d+)').astype(float)
+    ```
+*   **Step 2 (EDA)**: Visualisasi kategori gunung.
+    ```python
+    import seaborn as sns
+    sns.countplot(data=df, x='bentuk')
+    ```
+*   **Step 3 (Feature Engineering)**: Ekstrak koordinat dengan Regex.
+    ```python
+    import re
+    def extract_lat(text):
+        res = re.findall(r"[-+]?\d*\.\d+|\d+", str(text))
+        return float(res[0]) if res else 0
+    df['lat'] = df['geolokasi'].apply(extract_lat)
+    ```
+*   **Step 4 (Model Training)**: Latih model Random Forest.
+    ```python
+    from sklearn.ensemble import RandomForestClassifier
+    model = RandomForestClassifier()
+    model.fit(X_train, y_train)
+    ```
+*   **Step 5 (Model Validation)**: Cek akurasi.
+    ```python
+    from sklearn.metrics import classification_report
+    print(classification_report(y_test, y_pred))
+    ```
+*   **Step 6 (Tuning)**: Eksperimen parameter.
+    ```python
+    model = RandomForestClassifier(n_estimators=200, max_depth=10)
+    ```
+*   **Step 7 (Referensi)**: [Regex101](https://regex101.com/) untuk testing pola geolokasi.
 
 ---
 
 ## 📍 Tugas 2: Klastering (Clustering)
 **Dataset**: [indonesia_volcanoes.csv](https://raw.githubusercontent.com/yogski/indonesian_public_data/master/csv/indonesia_volcanoes.csv)  
-**Tujuan**: Mengelompokkan gunung berapi berdasarkan lokasi geografis untuk memetakan zona vulkanik.
+**Tujuan**: Mengelompokkan gunung berapi berdasarkan lokasi geografis.
 
-### 📋 Panduan Langkah Demi Langkah:
-*   **Step 1**: Ambil fitur Latitude dan Longitude yang sudah bersih dari Tugas 1. Pastikan tidak ada nilai `NaN`.
-*   **Step 2**: Visualisasikan lokasi gunung pada peta sederhana menggunakan `plt.scatter(long, lat)`. Anda akan melihat "garis" cincin api Indonesia.
-*   **Step 3**: Penting! Lakukan `StandardScaler` agar skala Latitude dan Longitude seimbang sebelum masuk ke algoritma.
-*   **Step 4**: Jalankan `KMeans` dengan beberapa nilai K (misal 1 sampai 10).
-*   **Step 5**: Gunakan **Elbow Method**. Cari titik di mana penurunan inersia mulai melambat (membentuk "siku").
-*   **Step 6**: Pilih K optimal, jalankan ulang model, dan tambahkan label klaster ke dataframe asli.
-*   **Step 7**: Pelajari dokumentasi K-Means tentang inisialisasi `k-means++`.
-
-#### 💡 Contoh Kode:
-```python
-from sklearn.cluster import KMeans
-from sklearn.preprocessing import StandardScaler
-
-# Scaling data
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(df[['lat', 'long']])
-
-# KMeans
-kmeans = KMeans(n_clusters=5, random_state=42)
-df['cluster'] = kmeans.fit_predict(X_scaled)
-```
+### 📋 Panduan & Referensi Kode:
+*   **Step 1 (Data Prep)**: Pastikan koordinat `lat` dan `long` sudah numerik dan tidak ada `NaN`.
+    ```python
+    df = df.dropna(subset=['lat', 'long'])
+    ```
+*   **Step 2 (EDA)**: Plot sebaran lokasi.
+    ```python
+    import matplotlib.pyplot as plt
+    plt.scatter(df['long'], df['lat'])
+    ```
+*   **Step 3 (Feature Engineering)**: Standarisasi data (Penting untuk KMeans!).
+    ```python
+    from sklearn.preprocessing import StandardScaler
+    X_scaled = StandardScaler().fit_transform(df[['lat', 'long']])
+    ```
+*   **Step 4 (Model Training)**: Jalankan KMeans.
+    ```python
+    from sklearn.cluster import KMeans
+    kmeans = KMeans(n_clusters=5)
+    kmeans.fit(X_scaled)
+    ```
+*   **Step 5 (Model Validation)**: Elbow Method (Inertia).
+    ```python
+    wcss = []
+    for k in range(1, 10):
+        km = KMeans(n_clusters=k).fit(X_scaled)
+        wcss.append(km.inertia_)
+    ```
+*   **Step 6 (Finalize)**: Tambahkan label klaster ke data.
+    ```python
+    df['cluster'] = kmeans.labels_
+    ```
+*   **Step 7 (Referensi)**: [Sklearn KMeans Docs](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html).
 
 ---
 
@@ -80,30 +103,39 @@ df['cluster'] = kmeans.fit_predict(X_scaled)
 **Dataset**: [indonesia_public_companies.csv](https://raw.githubusercontent.com/yogski/indonesian_public_data/master/csv/indonesia_public_companies.csv)  
 **Tujuan**: Memprediksi `jumlah_saham` berdasarkan `listing_age`.
 
-### 📋 Panduan Langkah Demi Langkah:
-*   **Step 1**: Ubah `tanggal_listing` menjadi tipe data datetime. Tangani data yang tidak valid jika ada.
-*   **Step 2**: Gunakan `df.corr()` untuk melihat apakah ada hubungan linear antara fitur numerik.
-*   **Step 3**: Buat fitur `listing_age`. Caranya: `Tahun_Sekarang - Tahun_Listing`. Fitur ini mencerminkan kematangan perusahaan di bursa.
-*   **Step 4**: Gunakan `LinearRegression`. Fit model menggunakan `listing_age` sebagai X.
-*   **Step 5**: Lihat skor `R-Squared`. Semakin mendekati 1, semakin baik model Anda menjelaskan data.
-*   **Step 6**: Coba gunakan `PolynomialFeatures` jika hubungan datanya tidak benar-benar lurus (linear).
-*   **Step 7**: Referensi: Dokumentasi `pd.to_datetime`.
-
-#### 💡 Contoh Kode:
-```python
-# Menghitung usia perusahaan
-df['thn_listing'] = pd.to_datetime(df['tanggal_listing']).dt.year
-df['usia_listing'] = 2024 - df['thn_listing']
-
-# Regresi Linear
-from sklearn.linear_model import LinearRegression
-model = LinearRegression()
-model.fit(df[['usia_listing']], df['jumlah_saham'])
-```
+### 📋 Panduan & Referensi Kode:
+*   **Step 1 (Data Prep)**: Konversi kolom tanggal.
+    ```python
+    df['tanggal_listing'] = pd.to_datetime(df['tanggal_listing'])
+    ```
+*   **Step 2 (EDA)**: Cek korelasi.
+    ```python
+    print(df.corr())
+    ```
+*   **Step 3 (Feature Engineering)**: Buat fitur usia listing.
+    ```python
+    df['listing_age'] = 2024 - df['tanggal_listing'].dt.year
+    ```
+*   **Step 4 (Model Training)**: Linear Regression.
+    ```python
+    from sklearn.linear_model import LinearRegression
+    model = LinearRegression()
+    model.fit(df[['listing_age']], df['jumlah_saham'])
+    ```
+*   **Step 5 (Model Validation)**: Metrik RMSE & R2.
+    ```python
+    from sklearn.metrics import r2_score, mean_squared_error
+    r2 = r2_score(y_test, y_pred)
+    ```
+*   **Step 6 (Tuning)**: Encoding kategori perusahaan.
+    ```python
+    df_encoded = pd.get_dummies(df, columns=['kategori'])
+    ```
+*   **Step 7 (Referensi)**: [Pandas Get Dummies](https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html).
 
 ---
 
 ## 📤 Kriteria Pengumpulan
 - **Format**: File `.ipynb` (Jupyter Notebook).
-- **Narasi**: Sertakan penjelasan singkat (1-2 kalimat) mengapa Anda melakukan langkah tersebut di setiap sel Markdown.
-- **Output**: Pastikan semua plot/grafik tampil sebelum file dikirim.
+- **Narasi**: Gunakan Markdown untuk menjelaskan alur kerja Anda.
+- **Output**: Grafik harus terlihat jelas.
